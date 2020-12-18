@@ -93,7 +93,7 @@ double cpp_accumulate_mutex(size_t count) {
                     local_sum += 1 / ((double) i + 1);
                 }
             {
-                std::lock_guard lock(mtx); //std::scoped_lock
+                std::lock_guard lock(mtx);
                 sum += local_sum;
             }
         });
@@ -156,7 +156,6 @@ double cpp_accumulate_reduction_static(size_t count) {
                 S *= 2;
             }
         }));
-    /*waiting threads*/
     for (auto &thread:threads)
         thread.join();
     return partial_sums[0];
